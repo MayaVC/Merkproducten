@@ -2,6 +2,8 @@ package be.oak3.persistence;
 
 import be.oak3.model.Parfum;
 import be.oak3.model.Product;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -14,6 +16,8 @@ public class BestellingImpl implements Bestelling {
 
     private static int productNummer = 1000;
 
+    private static Logger logger = LogManager.getLogger();
+
 
     public BestellingImpl() {
         bestelling = new ArrayList<>();
@@ -21,6 +25,10 @@ public class BestellingImpl implements Bestelling {
 
     public BestellingImpl(List<Product> bestelling) {
         this.bestelling = bestelling;
+    }
+
+    public static Logger getLogger() {
+        return logger;
     }
 
     @Override
@@ -31,13 +39,18 @@ public class BestellingImpl implements Bestelling {
     }
 
     @Override
-    public void sorteer() {
-        bestelling.sort(Comparator.naturalOrder());
-//            bestelling.sort((p1, p2) -> p1.compareTo(p2));
-        System.out.println(this);
+    public void sorteer(){
+        bestelling.stream().sorted(Comparator.naturalOrder()).forEach(logger::debug);
     }
 
 //    @Override
+//    public void sorteer() {
+//        bestelling.sort(Comparator.naturalOrder());
+//            bestelling.sort((p1, p2) -> p1.compareTo(p2));
+//        System.out.println(this);
+//    }
+
+    //    @Override
 //    public void sorteer() {
 //        List<Product> n = bestelling.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList());
 //        n.forEach(System.out::println);
@@ -46,33 +59,37 @@ public class BestellingImpl implements Bestelling {
 
     @Override
     public void sorteerOpMerk() {
-        bestelling.sort(Product.sorteerOpMerkNaam());
-        System.out.println(this);
+        bestelling.stream().sorted(Product.sorteerOpMerkNaam()).forEach(logger::debug);
     }
 
-//    OF:
+
 //    @Override
 //    public void sorteerOpMerk() {
-//        bestelling.stream().sorted(Product.sorteerOpMerkNaam()).forEach(System.out::println);
+//        bestelling.sort(Product.sorteerOpMerkNaam());
+//        System.out.println(this);
 //    }
 
 
     @Override
     public void sorteerOpVolume() {
-        bestelling.sort(Comparator.comparingInt(Product::getVolume));
-        System.out.println(this);
+//        Collections.sort(bestelling, Comparator.comparing(Product::getVolume));
+//        for (Product p: bestelling) {
+//            logger.debug(p);
+//        }
+        bestelling.stream().sorted(Comparator.comparingInt(Product::getVolume)).forEach(logger::debug);
     }
 
-//    @Override
+    //    @Override
 //    public void sorteerOpVolume() {
-//        bestelling.stream().sorted(Comparator.comparingInt(Product::getVolume)).forEach(System.out::println);
+//        bestelling.sort(Comparator.comparingInt(Product::getVolume));
+//        System.out.println(this);
 //    }
 
 
     @Override
     public void toonPerMerk(String merk) {
         bestelling.stream().filter(product -> product.getMerk().equalsIgnoreCase(merk))
-                .sorted(Comparator.comparingInt(Product::getVolume)).forEach(System.out::println);
+                .sorted(Comparator.comparingInt(Product::getVolume)).forEach(logger::debug);
     }
 
 //    @Override
@@ -85,7 +102,7 @@ public class BestellingImpl implements Bestelling {
     @Override
     public void toonGoedkopeProducten() {
         bestelling.stream().filter(product -> product.getPrijs()<50)
-                .sorted(Comparator.comparingInt(Product::getVolume)).forEach(System.out::println);
+                .sorted(Comparator.comparingInt(Product::getVolume)).forEach(logger::debug);
     }
 
     @Override
@@ -107,7 +124,7 @@ public class BestellingImpl implements Bestelling {
 
     public void toonParfums(){
         bestelling.stream().filter(product -> product instanceof Parfum)
-                .sorted(Comparator.comparingInt(Product::getVolume)).forEach(System.out::println);
+                .sorted(Comparator.comparingInt(Product::getVolume)).forEach(logger::debug);
     }
 
 //    Deze method moesten we niet in Bestelling zetten.

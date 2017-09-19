@@ -5,12 +5,16 @@ import be.oak3.model.Product;
 import java.util.List;
 
 public class TestApp {
+
+//  private static  Logger logger  = LogManager.getLogger();
+
     public static void main(String[] args) {
+
         System.out.printf("Oplossing van %s %s\n", "Kenneth Van Gijsel ",
                 "Java Instructeur");
 
         Bestelling bestelling = new BestellingImpl();
-        List<Product> lijst = be.oak3.persistence.Data.getData();
+        List<Product> lijst = Data.getData();
 
         for (Product artikel : lijst) {
             bestelling.voegProductToe(artikel);
@@ -39,13 +43,21 @@ public class TestApp {
         bestelling.toonGoedkopeProducten();
 
         Product product = bestelling.zoekDuursteProduct();
-        System.out.println("\nDuurste product:\n" + product);
+        System.out.println("\nDuurste product:");
+        BestellingImpl bestelling1 = (BestellingImpl) bestelling;
+//        logger.debug(product);
+        bestelling1.getLogger().debug(product);
+
+//        Product product = bestelling.zoekDuursteProduct();
+//        System.out.println("\nDuurste product:\n" + product);
 
 //        List<Product> duurste = bestelling.zoekDuursteProduct();
 //        System.out.println("\nDuurste product:\n" + duurste);
 
+        System.out.printf("\nTotale prijs:\n");
+        bestelling1.getLogger().debug( "€" + bestelling.totalePrijs());
 
-        System.out.printf("\nTotale prijs: €%.2f", bestelling.totalePrijs());
+//        System.out.printf("\nTotale prijs: €%.2f", bestelling.totalePrijs());
 
     }
 }
