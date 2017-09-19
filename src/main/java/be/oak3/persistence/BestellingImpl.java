@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BestellingImpl implements Bestelling {
 //  De interface berekenbaar wordt ook geïmplementeerd! (Want wordt geïmplementeerd door Bestelling.)
@@ -18,6 +19,9 @@ public class BestellingImpl implements Bestelling {
     private static int productNummer = 1000;
 
     private static Logger logger = LogManager.getLogger();
+
+
+
 
 
     public BestellingImpl() {
@@ -43,7 +47,7 @@ public class BestellingImpl implements Bestelling {
     public void sorteer(){
         bestelling.stream().sorted(Comparator.naturalOrder()).forEach(logger::debug);
     }
-
+//    OF (maar dan werd het moeilijk als ik de System.out.println moest vervangen door Loggers):
 //    @Override
 //    public void sorteer() {
 //        bestelling.sort(Comparator.naturalOrder());
@@ -51,7 +55,8 @@ public class BestellingImpl implements Bestelling {
 //        System.out.println(this);
 //    }
 
-    //    @Override
+//    OF:
+//    @Override
 //    public void sorteer() {
 //        List<Product> n = bestelling.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList());
 //        n.forEach(System.out::println);
@@ -64,7 +69,8 @@ public class BestellingImpl implements Bestelling {
     }
 
 
-//    @Override
+//  OF:
+//  @Override
 //    public void sorteerOpMerk() {
 //        bestelling.sort(Product.sorteerOpMerkNaam());
 //        System.out.println(this);
@@ -73,38 +79,61 @@ public class BestellingImpl implements Bestelling {
 
     @Override
     public void sorteerOpVolume() {
+        bestelling.stream().sorted(Comparator.comparingInt(Product::getVolume)).forEach(logger::debug);
+//        Code van Marco:
 //        Collections.sort(bestelling, Comparator.comparing(Product::getVolume));
 //        for (Product p: bestelling) {
 //            logger.debug(p);
 //        }
-        bestelling.stream().sorted(Comparator.comparingInt(Product::getVolume)).forEach(logger::debug);
     }
 
-    //    @Override
+    // OF:
+    // @Override
 //    public void sorteerOpVolume() {
 //        bestelling.sort(Comparator.comparingInt(Product::getVolume));
 //        System.out.println(this);
 //    }
 
 
+//      Hoort bij DEEL 1 en 2 van de opvave:
+//   @Override
+//    public void toonPerMerk(String merk) {
+//        bestelling.stream().filter(product -> product.getMerk().equalsIgnoreCase(merk))
+//                .sorted(Comparator.comparingInt(Product::getVolume)).forEach(logger::debug);
+//    }
+
     @Override
-    public void toonPerMerk(String merk) {
-        bestelling.stream().filter(product -> product.getMerk().equalsIgnoreCase(merk))
-                .sorted(Comparator.comparingInt(Product::getVolume)).forEach(logger::debug);
+    public List<Product> lijstVanBepaaldMerk(String merk) {
+        return bestelling.stream().filter(product -> product.getMerk()
+                .equalsIgnoreCase(merk)).collect(Collectors.toList());
     }
 
+//      Hoort bij DEEL 1 en 2 van de opvave:
 //    @Override
-//    public List<Product> lijstVanBepaaldMerk(String merk) {
-//        return bestelling.stream().filter(product -> product.getMerk()
-//                .equalsIgnoreCase(merk)).collect(Collectors.toList());
+//    public void toonGoedkopeProducten() {
+//        bestelling.stream().filter(product -> product.getPrijs()<50)
+//                .sorted(Comparator.comparingInt(Product::getVolume)).forEach(logger::debug);
 //    }
 
 
     @Override
-    public void toonGoedkopeProducten() {
-        bestelling.stream().filter(product -> product.getPrijs()<50)
-                .sorted(Comparator.comparingInt(Product::getVolume)).forEach(logger::debug);
+    public List<Product> lijstVanGoedkopeProducten(){
+        return bestelling.stream().filter(product -> product.getPrijs()<50).collect(Collectors.toList());
     }
+
+
+//    Volgende method moesten we niet in Bestelling zetten --> wel doen, anders werkt de test-App niet.
+//    Hoort bij DEEL 1 en 2 van de opgave:
+//    public void toonParfums(){
+//        bestelling.stream().filter(product -> product instanceof Parfum)
+//                .sorted(Comparator.comparingInt(Product::getVolume)).forEach(logger::debug);
+//    }
+
+
+    public List<Product> lijstVanParfums(){
+        return bestelling.stream().filter(product -> product instanceof Parfum).collect(Collectors.toList());
+    }
+
 
     @Override
     public Product zoekDuursteProduct() {
@@ -123,13 +152,6 @@ public class BestellingImpl implements Bestelling {
 //            return productPerPrijs.get(lijstPrijzen.get(0));
 //        }
 
-    public void toonParfums(){
-        bestelling.stream().filter(product -> product instanceof Parfum)
-                .sorted(Comparator.comparingInt(Product::getVolume)).forEach(logger::debug);
-    }
-
-//    Deze method moesten we niet in Bestelling zetten.
-//    Als we die in de TestApp willen gebruiken, moeten we bestelling dus eerst type casten naar een BestellingImpl.
 
     @Override
     public double totalePrijs() {

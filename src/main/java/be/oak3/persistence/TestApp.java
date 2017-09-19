@@ -29,18 +29,30 @@ public class TestApp {
         System.out.println("\nLijst gesorteerd op volume: ");
         bestelling.sorteerOpVolume();
 
-        System.out.println("\nVan het merk Georgio Armani:");
-        bestelling.toonPerMerk("Georgio Armani");
 
-        System.out.println("\nAlle Parfums:");
-        bestelling.toonParfums();
+//        Hoort bij DEEL 1 en 2 van de opgave:
+//        System.out.println("\nVan het merk Georgio Armani:");
+//        bestelling.toonPerMerk("Georgio Armani");
 
+//        Test om te kijken of method lijstVanBepaaldMerk() werkt:
+//        System.out.println("\nVan het merk Georgio Armani:");
+//        System.out.println(bestelling.lijstVanBepaaldMerk("Georgio Armani"));
+
+//        Hoort bij DEEL 1 en 2 van de opgave:
 //        System.out.println("\nAlle Parfums:");
-//        BestellingImpl bestelling1 = (BestellingImpl) bestelling;
-//        bestelling1.toonParfums();
+//        bestelling.toonParfums();
 
-        System.out.println("\nAlle producten onder €50; ");
-        bestelling.toonGoedkopeProducten();
+//        Test om te kijken of method lijstVanParfums() werkt:
+//        System.out.println("\nAlle parfums:");
+//        System.out.println(bestelling.lijstVanParfums());
+
+//        Hoort bij DEEL 1 en 2 van de opgave:
+//        System.out.println("\nAlle producten onder €50; ");
+//        bestelling.toonGoedkopeProducten();
+
+//        Test om te kijken of method lijstVanGoedkopeProducten() werkt:
+//        System.out.println("\nAlle producten onder €50; ");
+//        System.out.println(bestelling.lijstVanGoedkopeProducten());
 
         Product product = bestelling.zoekDuursteProduct();
         System.out.println("\nDuurste product:");
