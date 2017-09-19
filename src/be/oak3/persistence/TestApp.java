@@ -10,7 +10,7 @@ public class TestApp {
                 "Java Instructeur");
 
         Bestelling bestelling = new BestellingImpl();
-        List<Product> lijst = be.oak3.java8.Data.getData();
+        List<Product> lijst = be.oak3.persistence.Data.getData();
 
         for (Product artikel : lijst) {
             bestelling.voegProductToe(artikel);
@@ -31,11 +31,19 @@ public class TestApp {
         System.out.println("\nAlle Parfums:");
         bestelling.toonParfums();
 
+//        System.out.println("\nAlle Parfums:");
+//        BestellingImpl bestelling1 = (BestellingImpl) bestelling;
+//        bestelling1.toonParfums();
+
         System.out.println("\nAlle producten onder €50; ");
         bestelling.toonGoedkopeProducten();
 
         Product product = bestelling.zoekDuursteProduct();
         System.out.println("\nDuurste product:\n" + product);
+
+//        List<Product> duurste = bestelling.zoekDuursteProduct();
+//        System.out.println("\nDuurste product:\n" + duurste);
+
 
         System.out.printf("\nTotale prijs: €%.2f", bestelling.totalePrijs());
 

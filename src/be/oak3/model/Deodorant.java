@@ -15,6 +15,6 @@ public class Deodorant extends Product {
 
     @Override
     public String toString() {
-        return  String.format(super.toString() + "%-5s", soort);
+        return  String.format(super.toString() + "%-3s", soort);
     }
 }
