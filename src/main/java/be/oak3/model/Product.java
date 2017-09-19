@@ -1,6 +1,7 @@
 package be.oak3.model;
 
 import java.util.Comparator;
+import static org.apache.commons.lang3.StringUtils.*;
 
 public abstract class Product implements Comparable<Product>{
     //Comparator wordt zelden geïmplementeerd omdat het een zelf gekozen volgorde maakt
@@ -49,8 +50,7 @@ public abstract class Product implements Comparable<Product>{
     }
 
     public String getProductCode(){
-        return (merk.substring(0,3) + naam.substring(0,3) + (String.valueOf(volume)))
-                                .toUpperCase().replace(" ", "_");
+        return replaceChars(upperCase(join(left(merk,3), left(naam,3),(String.valueOf(volume))))," ","_");
     }
 
     public static Comparator<Product> sorteerOpMerkNaam(){
