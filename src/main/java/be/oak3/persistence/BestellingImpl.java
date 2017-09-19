@@ -2,6 +2,7 @@ package be.oak3.persistence;
 
 import be.oak3.model.Parfum;
 import be.oak3.model.Product;
+import com.google.common.collect.Lists;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -12,7 +13,7 @@ import java.util.List;
 public class BestellingImpl implements Bestelling {
 //  De interface berekenbaar wordt ook geïmplementeerd! (Want wordt geïmplementeerd door Bestelling.)
 
-    private List<Product> bestelling = new ArrayList<>();
+    private List<Product> bestelling = Lists.newArrayList();
 
     private static int productNummer = 1000;
 
