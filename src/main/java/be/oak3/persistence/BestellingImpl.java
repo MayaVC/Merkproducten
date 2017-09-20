@@ -6,7 +6,6 @@ import com.google.common.collect.Lists;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,13 +18,14 @@ public class BestellingImpl implements Bestelling {
     private static int productNummer = 1000;
 
     private static Logger logger = LogManager.getLogger();
+//    OF: private static Logger logger = Logger.getLogger(TestApp.class);
 
 
 
 
 
     public BestellingImpl() {
-        bestelling = new ArrayList<>();
+        bestelling = Lists.newArrayList();
     }
 
     public BestellingImpl(List<Product> bestelling) {
@@ -34,6 +34,10 @@ public class BestellingImpl implements Bestelling {
 
     public static Logger getLogger() {
         return logger;
+    }
+
+    public List<Product> getBestelling() {
+        return bestelling;
     }
 
     @Override

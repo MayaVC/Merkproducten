@@ -33,12 +33,24 @@ public abstract class Product implements Comparable<Product>{
         return merk;
     }
 
+    public void setMerk(String merk) {
+        this.merk = merk;
+    }
+
     public String getNaam() {
         return naam;
     }
 
+    public void setNaam(String naam) {
+        this.naam = naam;
+    }
+
     public int getVolume() {
         return volume;
+    }
+
+    public void setVolume(int volume) {
+        this.volume = volume;
     }
 
     public double getPrijs() {
