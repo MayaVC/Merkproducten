@@ -23,14 +23,13 @@ public class BestellingImpl implements Bestelling {
 
 
 
-
     public BestellingImpl() {
         bestelling = Lists.newArrayList();
     }
 
-    public BestellingImpl(List<Product> bestelling) {
-        this.bestelling = bestelling;
-    }
+//    public BestellingImpl(List<Product> bestelling) {
+//        this.bestelling = bestelling;
+//    }
 
     public static Logger getLogger() {
         return logger;
@@ -49,16 +48,9 @@ public class BestellingImpl implements Bestelling {
 
     @Override
     public void sorteer(){
-        bestelling.stream().sorted(Comparator.naturalOrder()).forEach(logger::debug);
+        bestelling.sort(Comparator.naturalOrder());
+        bestelling.forEach(logger::debug);
     }
-//    OF (maar dan werd het moeilijk als ik de System.out.println moest vervangen door Loggers):
-//    @Override
-//    public void sorteer() {
-//        bestelling.sort(Comparator.naturalOrder());
-//            bestelling.sort((p1, p2) -> p1.compareTo(p2));
-//        System.out.println(this);
-//    }
-
 //    OF:
 //    @Override
 //    public void sorteer() {
@@ -66,37 +58,56 @@ public class BestellingImpl implements Bestelling {
 //        n.forEach(System.out::println);
 //    }
 
+//    OPLOSSING IN DEEL 2:
+//    public void sorteer(){
+//        bestelling.stream().sorted(Comparator.naturalOrder()).forEach(logger::debug);
+//    }
+//    OPLOSSING IN DEEL 1: (maar dan werd het moeilijk als ik de System.out.println moest vervangen door Loggers):
+//    @Override
+//    public void sorteer() {
+//        bestelling.sort(Comparator.naturalOrder());
+//            bestelling.sort((p1, p2) -> p1.compareTo(p2));
+//        System.out.println(this);
+//    }
 
     @Override
     public void sorteerOpMerk() {
-        bestelling.stream().sorted(Product.sorteerOpMerkNaam()).forEach(logger::debug);
+        bestelling.sort(Product.sorteerOpMerkNaam());
+        bestelling.forEach(logger::debug);
     }
 
+//    OPLOSSING IN DEEL 2:
+//    @Override
+//    public void sorteerOpMerk() {
+//        bestelling.stream().sorted(Product.sorteerOpMerkNaam()).forEach(logger::debug);
+//    }
 
-//  OF:
-//  @Override
+//    OPLOSSING IN DEEL 1:
+//    @Override
 //    public void sorteerOpMerk() {
 //        bestelling.sort(Product.sorteerOpMerkNaam());
 //        System.out.println(this);
 //    }
 
-
     @Override
     public void sorteerOpVolume() {
-        bestelling.stream().sorted(Comparator.comparingInt(Product::getVolume)).forEach(logger::debug);
-//        Code van Marco:
-//        Collections.sort(bestelling, Comparator.comparing(Product::getVolume));
-//        for (Product p: bestelling) {
-//            logger.debug(p);
-//        }
+        bestelling.sort(Comparator.comparingInt(Product::getVolume));
+        bestelling.forEach(logger::debug);
     }
 
-    // OF:
-    // @Override
+//    OPLOSSING IN DEEL 2:
+//    @Override
+//    public void sorteerOpVolume() {
+//        bestelling.stream().sorted(Comparator.comparingInt(Product::getVolume)).forEach(logger::debug);
+//    }
+
+//    OPLOSSING IN DEEL 1:
+//    @Override
 //    public void sorteerOpVolume() {
 //        bestelling.sort(Comparator.comparingInt(Product::getVolume));
 //        System.out.println(this);
 //    }
+
 
 
 //      Hoort bij DEEL 1 en 2 van de opvave:

@@ -40,7 +40,7 @@ public class ProductTest {
         assertEquals("Anais", product.getNaam());
         assertEquals(50, product.getVolume());
         assertEquals(61.52, product.getPrijs(),0.000001);
-//        assertThat(product).isInstanceOf(Parfum.class);
+        assertThat(product).isInstanceOf(Parfum.class);
     }
 
     @Test
@@ -52,6 +52,12 @@ public class ProductTest {
         product.setVolume(50);
         product.setPrijs(61.52);
         assertEquals("CACANA50",product.getProductCode());
+        product.setProductNummer(1000);
+        product.setMerk("DKNY");
+        product.setNaam("Be Delicious Women");
+        product.setVolume(100);
+        product.setPrijs(33.65);
+        assertEquals("DKNBE_100",product.getProductCode());
     }
 
     @Test

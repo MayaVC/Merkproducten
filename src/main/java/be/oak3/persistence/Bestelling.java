@@ -22,6 +22,9 @@ public interface Bestelling extends Berekenbaar{
     List<Product> lijstVanParfums();
 
     Product zoekDuursteProduct();
+
+    List<Product> getBestelling();
+
 //    List<Product> zoekDuursteProduct();
 
 
